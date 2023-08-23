@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-fastapi-app
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: ClusterIP
+  selector:
+    app: python-fastapi-app
+[root@data-node01 base]# cat harbor-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-registry-key
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJoYXJib3IuZGV2b3BzLm1jZC5jb20uY24iOiB7CgkJCSJhdXRoIjogImNtOWliM1FrWVhWMGJ5MWphV05rT21WNVNtaGlSMk5wVDJsS1UxVjZTVEZPYVVselNXNVNOV05EU1RaSmEzQllWa05LT1M1bGVVcHNaVWhCYVU5cVVUUk5WRVV6VFdwVmVVNTZRWE5KYld4b1pFTkpOazFVV1RGUFJFVjVUbFJKTTAxRGQybGhXRTU2U1dwdmFXRkhSbmxaYlRsNVRGaFNkbUV5Vm5WTVYxSnNXbTFHTVdKSVVrcGpNMDR4V2xoSmFVeERTbkJhUTBrMlRWUlJjMGx1UW5CYVEwazJUVlJKTVV4RFNtaFpNazVzWXpOTmFVOXNkRGRKYkVwc1l6STVNV050VG14SmFtOXBURE5DZVdJeWNHeFpNMUYyVFZSSk1Vd3pTbXhqUnpsNllWaFNkbU51YTJsTVEwcENXVE5TY0dJeU5HbFBhVXAzWkZoT2IwbHBkMmxTVjFwdFdsZE9NRWxxYjJsSmJqQnpaWGxLVTFwWVRuWmtXRXBxV2xOSk5rbHBPWGRqYlRseFdsZE9NRXg2UlhsT1V6bHZXbGQ0ZEV4WFRtOVpXRW93U1dsM2FWRlhUakJoVnpsMVNXcHZhV050Vm1oYVEwbHpTV3RXYlZwdFZtcGtRMGsyU1dsS09VeEljMmxWYlZaNllqTldlVmt5VldsUGFVbDJZMGhLZG1GdFZtcGtRemg0VFdwVmRtRkhWbk5pVXpGcVlVZEdlV1JETVRKYVdFcDZZVmM1ZFVscGQybFJWMDR3WVZjNWRVbHFiMmxaTTBwc1dWaFNiRWxwZDJsU1YxcHRXbGRPTUVscWIybEpiakZrWmxFdVlUbFZjMVUwWkROcmVVWlVkMFJ5YW5WTVVYQjBkbk5sWkdwV2FFcE1WMkZhVUhadWFqZFZhRk5oWmpaTWFGWnRUekZDTVRFd1FrRm5hek5LZEU5b1JHRkdOR2RJYUc1bllWOUpXbEpFVDJkclh6WXRUVkozU1RSbVJuVjJlRnBwZGs1NE1sZHZRV1Z3U0RseGFUUllObnBCVGpCWFduZ3djMDh3VjNwc2JEbFpiWFZYY0ZoU01UUjNhV2hVZEVOTmRrMHRWUzE0UTBkSFNuUkhTalJGTWpaVVNXTnNZbGhIUjFoVE1YcE5Uelo0UTB0d1pucGlMWGRYWWpORGVWQnFlRFEyT0d0YVMydEZNMU0wYm5ST01IQllVM2xDWkZaVVJtOTFhVnBqUWpWdmRrSlBVM1Y2U3psS1gzQTVha05SZFZFME1YVTJUalF4VGxKNFJFMTRaRWhmVTBoQ05FVmFkbTUwZEc5alQzbHBSM2c0U0RabVZGWmxkblZvVkVjMlV6VTNaa1pSVEUxT2JsWkdjRmxVWmpOaVoyOHpXblZIWlhndE1rTjZSelEwUms5MVdsWm5jMkYzWjIxSWExZzNkMDF3Y1ZwNWRFSnRlazV1UVRGYVVIQlpkRVJ4UkZWRlZrOW5TemRYY0V0RWFGaHlhMGd3YUVaamJqQnVNbGswZDBKdlJrbElUVkJYWDB4RFkxWlNjbXh0U2xOdlVscE1UVTFtUkRsVWFFSlNaRnBzYTFWVk5FdzRTMnhYTFRkM09UbDVSSEV4WjJKWUxUSktWMGR1Wm5ob2NsWTFUVlJrVlV4NmVraHdTMlpVV21KWWRFMXFSbVJ4V1VveWRIUjZNVzFET0hkbVFVTndibEpGYkVsdVdrUTBhVzAxUmt0UGNGaGxWMVpOZDA5clNtNXZOMXAzWVZSa1QxTm5VMnRRVDBaRE5tZFRiSHA0U1hwemMxcHNVWE5FVEhGM2JrUnNZa05qTW5GSGJVdzRUVlF5TVcxS1dqZE5VbGw2VlRjdGNuQk9SVW8yZG1jdFptNDNNRmg2WTFGc2IybFpjV05tUjJsNVNtNXdVbTVIZHpKMmFuUkRVVk5JUkZWNGJXWmxaV3hGUkRoSGJtOU5kMkppYUZZeVlteFVVRmx3WXpodk0yVk1XR1pQZFVKSVFtZGhXSHAzWTJweFNWOXVaMFYzYWswMWNsOHhiVEY1VWtrPSIKCQl9Cgl9Cn0K
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-fastapi-app
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: ClusterIP
+  selector:
+    app: python-fastapi-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-fastapi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-fastapi-app
+  template:
+    metadata:
+      labels:
+        app: python-fastapi-app
+    spec:
+      containers:
+      - env:
+        - name: PROFILE
+          value: 
+        image: registry.cn-shanghai.aliyuncs.com/c-things/python-fastapi-app:v1.0.1
+        imagePullPolicy: IfNotPresent
+        name: python-fastapi-app
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+          name: http-8000
+        resources:
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+          limits:
+            cpu: "4"
+            memory: "8Gi"
+      imagePullSecrets:
+      - name: harbor-registry-key
