@@ -14,3 +14,7 @@ starlette==0.17.1
 typing_extensions==4.2.0
 uvicorn==0.17.6
 validators==0.18.2
+opentelemetry-distro==0.40b0
+opentelemetry-exporter-otlp==1.19.0
+opentelemetry-instrumentation-fastapi==0.40b0
+
